@@ -898,13 +898,7 @@ class DropboxClient(object):
             params['rev'] = rev
 
         url, params, headers = self.request(path, params, method='GET', content_server=True)
-        if start is not None:
-            if length:
-              headers['Range'] = 'bytes=%s-%s' % (start, start + length - 1)
-            else:
-              headers['Range'] = 'bytes=%s-' % start
-        elif length is not None:
-            headers['Range'] = 'bytes=-%s' % length
+
         return self.rest_client.request("GET", url, headers=headers, raw_response=True)
 
 
